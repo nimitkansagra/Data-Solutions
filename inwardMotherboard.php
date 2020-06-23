@@ -1,6 +1,6 @@
-<?php 
+<?php
   include('includes/loginCheck.php');
-  include('includes/connection.php'); 
+  include('includes/connection.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -53,7 +53,7 @@
               <div class="card-header border-0">
                 <div class="d-flex justify-content-between">
                   <h3 class="card-title"><strong>Motherboard Details</strong></h3>
-                  <a href="javascript:void(0);">View Report</a>
+                  <a href="motherboard.php">View Report</a>
                 </div>
               </div>
               <div class="card-body">
@@ -209,7 +209,7 @@
   <footer class="main-footer">
     <!-- To the right -->
     <div class="float-right d-none d-sm-inline">
-      
+
     </div>
     <!-- Default to the left -->
     <strong>Copyright &copy; 2014-2019 <a href="">Data Solutions</a>.</strong> All rights reserved.

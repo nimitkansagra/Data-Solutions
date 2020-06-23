@@ -34,7 +34,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Motherboard</h1>
+            <h1>DVR</h1>
           </div>
           <div class="col-sm-6">
             <!--<ol class="breadcrumb float-sm-right">
@@ -56,36 +56,38 @@
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th>#</th>
-                  <th>Customer</th>
-                  <th>Company</th>
-                  <th>Name</th>
-                  <th>Problem</th>
-                  <th>Status</th>
-                  <th>Inward</th>
-                  <th>Outward</th>
+                    <th>#</th>
+                    <th>Customer</th>
+                    <th>Company</th>
+                    <th>Storage</th>
+                    <th>Priority</th>
+                    <th>Problem</th>
+                    <th>Status</th>
+                    <th>Inward</th>
+                    <th>Outward</th>
                 </tr>
                 </thead>
                 <tbody>
                 <?php
-                  $sql = "SELECT customer.name 'customer_name',motherboard.* FROM customer RIGHT JOIN motherboard ON customer.id = motherboard.customer_id";
+                  $sql = "SELECT customer.name 'customer_name',dvr.* FROM customer RIGHT JOIN dvr ON customer.id = dvr.customer_id";
                   $result = mysqli_query($con,$sql);
                   if (mysqli_num_rows($result) > 0){
                     while($row = mysqli_fetch_assoc($result)){
                 ?>
                 <tr>
                   <td>
-                      <a href="viewMotherboardDetails.php?customerId=<?php echo $row['customer_id']; ?>&id=<?php echo $row['id']; ?>">
+                      <a href="viewDvrDetails.php?customerId=<?php echo $row['customer_id']; ?>&id=<?php echo $row['id']; ?>">
                         <?php echo $row['id']; ?>
                       </a>
                   </td>
                   <td>
-                    <a href="viewMotherboardDetails.php?customerId=<?php echo $row['customer_id']; ?>&id=<?php echo $row['id']; ?>">
+                    <a href="viewDvrDetails.php?customerId=<?php echo $row['customer_id']; ?>&id=<?php echo $row['id']; ?>">
                       <?php echo $row['customer_name']; ?>
                     </a>
                   </td>
                   <td><?php echo $row['company']; ?></td>
-                  <td><?php echo $row['name']; ?></td>
+                  <td><?php echo $row['storage_capacity']." ".$row['storage_unit']; ?></td>
+                  <td><?php echo $row['priority']; ?></td>
                   <td><?php echo $row['problem']; ?></td>
                   <td><?php echo $row['status']; ?></td>
                   <td><?php echo $row['inward']; ?></td>
@@ -98,14 +100,15 @@
                 </tbody>
                 <tfoot>
                 <tr>
-                  <th>#</th>
-                  <th>Customer</th>
-                  <th>Company</th>
-                  <th>Name</th>
-                  <th>Problem</th>
-                  <th>Status</th>
-                  <th>Inward</th>
-                  <th>Outward</th>
+                    <th>#</th>
+                    <th>Customer</th>
+                    <th>Company</th>
+                    <th>Storage</th>
+                    <th>Priority</th>
+                    <th>Problem</th>
+                    <th>Status</th>
+                    <th>Inward</th>
+                    <th>Outward</th>
                 </tr>
                 </tfoot>
               </table>

@@ -1,256 +1,284 @@
-<?php 
-  include('includes/loginCheck.php');
-  include('includes/connection.php'); 
+<?php
+include('includes/loginCheck.php');
+include('includes/connection.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>Data Solutions | Admin</title>
+    <title>Data Solutions | Admin</title>
 
-  <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
-  <!-- IonIcons -->
-  <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="dist/css/adminlte.min.css">
-  <!-- Google Font: Source Sans Pro -->
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+    <!-- IonIcons -->
+    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="dist/css/adminlte.min.css">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
 <body class="hold-transition sidebar-mini">
-<div class="wrapper">
+    <div class="wrapper">
 
-  <!-- Menu  -->
-  <?php include('includes/menu.php'); ?>
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Inward Storage Devices</h1>
-          </div><!-- /.col -->
-          <div class="col-sm-6">
-            <!--<ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-            </ol>-->
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content-header -->
-
-    <!-- Main content -->
-    <div class="content">
-      <div class="container-fluid">
-        <div class="row">
-        <div class="col-lg-12">
-            <div class="card">
-              <div class="card-header border-0">
-                <div class="d-flex justify-content-between">
-                  <h3 class="card-title"><strong>Storage Devices</strong></h3>
-                  <a href="javascript:void(0);">View Report</a>
-                </div>
-              </div>
-              <div class="card-body">
-                <!-- Form for customers -->
-                <div class="card card-primary">
-                  <div class="card-header">
-                    <h3 class="card-title">Customer Details</h3>
-                  </div>
-                  <!-- /.card-header -->
-                  <!-- form start -->
-                  <form role="form" action="<?php  echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
-                    <div class="card-body">
-                      <div class="form-group">
-                        <label for="mobileNo">Mobile No</label>
-                        <input type="text" class="form-control" id="mobileNo" name="mobileNo" placeholder="Mobile No">
-                      </div>
-                      <input type="hidden" class="form-control" name="customerId" required>
-                      <div class="form-group">
-                        <label for="fullName">Full Name</label>
-                        <input type="text" class="form-control" name="fullName" placeholder="Enter Full Name">
-                      </div>
-                      <div class="form-group">
-                        <label for="email">Email address</label>
-                        <input type="email" class="form-control" name="email" placeholder="Enter Email">
-                      </div>
-                    </div>
-                    <!-- /.card-body -->
-                </div>
-                <!-- /.card -->
-
-                <!-- Form for storage devices -->
-                <div class="card card-success">
-                  <div class="card-header">
-                    <h3 class="card-title">Inward Storage Device</h3>
-                  </div>
-                  <div class="card-body">
-                    <div class="form-group">
-                      <label>Select Storage Device *</label>
-                      <select class="form-control" name="storageDevice" requierd>
-                        <option value="">Select Storage Device</option>
-                        <option>Hard Disk</option>
-                        <option>DVR</option>
-                        <option>Pen Drive</option>
-                        <option>Memory Card</option>
-                      </select>
-                    </div>
-                    <div id="hardDiskDetail">
-                      <div class="form-group">
-                        <label for="company">Serial No. *</label>
-                        <input type="text" class="form-control" name="serialNo" placeholder="Enter Serial No">
-                      </div>
-                      <div class="form-group">
-                        <label for="company">Firmware No.</label>
-                        <input type="text" class="form-control" name="firmwareNo" placeholder="Enter Firmware No">
-                      </div>
-                      <div class="form-group">
-                        <label for="company">WWN No.</label>
-                        <input type="text" class="form-control" name="wwnNo" placeholder="Enter WWN No">
-                      </div>
-                      <div class="row">
-                        <div class="col-6">
-                          <div class="form-group">
-                            <label>Select Type Of Hard Disk *</label>
-                            <select class="form-control" name="hardDiskType" required>
-                              <option value="">Select Type Of Hard Disk</option>
-                              <option>Desktop</option>
-                              <option>Portable</option>
-                              <option>SSD</option>
-                              <option>Other</option>
-                            </select>
-                          </div>
-                        </div>
-                        <div class="col-6">
-                          <div class="form-group">
-                            <label>Type Of SSD</label>
-                            <select class="form-control" name="ssdType" required>
-                              <option value="">Select Type Of SSD</option>
-                              <option>NVME</option>
-                              <option>SATA</option>
-                            </select>
-                          </div>                        
-                        </div>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label for="company">Company *</label>
-                      <input type="text" class="form-control" name="company" placeholder="Enter Full Name" required>
-                    </div>
-                    <div class="row">
-                      <div class="col-8">
-                        <div class="form-group">
-                          <label for="storageCapacity">Storage Capacity *</label>
-                          <input type="text" class="form-control" name="storageCapacity" placeholder="Enter Storage Capacity" required>
-                        </div>
-                      </div>
-                      <div class="col-4">
-                        <div class="form-group">
-                          <label>Unit *</label>
-                          <select class="form-control" name="storageUnit" required>
-                            <option>MB</option>
-                            <option>GB</option>
-                            <option>TB</option>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label for="company">Priority</label>
-                      <input type="text" class="form-control" name="company" placeholder="Enter Full Name">
-                    </div>
-                    <div class="form-group">
-                      <label>Problem *</label>
-                      <textarea class="form-control" rows="3" placeholder="Enter Your Problem" name="problem" required></textarea>
-                    </div>
-                  </div>
-                  <!-- /.card-body -->
-                  <div class="card-footer">
-                      <button type="submit" class="btn btn-primary btn-block" name="submit">Submit</button>
-                    </div>
-                </div>
-                <!-- /.card -->
-                <?php
-                  if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                    if(isset($_POST['submit'])){
-                      $customerId = $_POST['customerId'];
-                      $name = $_POST['fullName'];
-                      $email = $_POST['email'];
-                      $phone = $_POST['mobileNo'];
-                      
-                      $storageDevice = $_POST['storageDevice'];
-                      $company = $_POST['company'];
-                      $storageCapacity = $_POST['storageCapacity'];
-                      $storageUnit = $_POST['storageUnit'];
-                      $priority = $_POST['priority'];
-                      $problem = $_POST['problem'];
-
-                      $newId = 0;
-
-                      // New customer entery and fetch Id
-                      if($customerId=="0"){
-                        $sql1 = "INSERT INTO customer (name,email,phone) VALUES ('$name','$email','$phone')";
-                        if(mysqli_query($con, $sql1)){
-                          $sql2 = "SELECT id FROM customer WHERE phone = '$phone'";
-                          $result = mysqli_query($con, $sql2);
-                          if(mysqli_num_rows($result) > 0) {
-                            $row = mysqli_fetch_assoc($result);
-                            $newId = $row['id'];
-                            //new customer laptop insert
-                            $sql = "INSERT INTO laptop (customer_id,company,model_no,with_adapter,problem)
-                            VALUES ('$newId','$company','$modelNo','$withAdapter','$problem')";
-                            if(mysqli_query($con, $sql)) {
-                              echo "<script>alert('Data Inserted');</script>";
-                            }
-                            else{
-                              echo "<script>alert('Error while inserting laptop data');</script>";
-                            }
-                          }
-                        }
-                        else{
-                          echo "<script>alert('Error while inserting user data');</script>";
-                        }
-                      }
-                      else{
-                        // existing customer laptop insert
-                        $sql = "INSERT INTO laptop (customer_id,company,model_no,with_adapter,problem)
-                        VALUES ('$customerId','$company','$modelNo','$withAdapter','$problem')";
-                        if(mysqli_query($con, $sql)) {
-                          echo "<script>alert('Data Inserted');</script>";
-                        }
-                        else{
-                          echo "<script>alert('Error while inserting laptop data');</script>";
-                        }
-                      }
-                    }
-                  }
-                ?>
-              </div>
-            </div>
-            <!-- /.card -->
-          </div>
+        <!-- Menu  -->
+        <?php include('includes/menu.php'); ?>
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0 text-dark">Inward Storage Device</h1>
+                        </div><!-- /.col -->
+                        <div class="col-sm-6">
+                            <!--<ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        </ol>-->
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
         </div>
-        <!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
+        <!-- /.content-header -->
 
-  <!-- Main Footer -->
-  <footer class="main-footer">
-    <!-- To the right -->
-    <div class="float-right d-none d-sm-inline">
-      
+        <!-- Main content -->
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-header border-0">
+                                <div class="d-flex justify-content-between">
+                                    <h3 class="card-title"><strong>Storage Device Details</strong></h3>
+                                    <a href="javascript:void(0);">View Report</a>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <!-- Form for customers -->
+                                <div class="card card-primary">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Customer Details</h3>
+                                    </div>
+                                    <!-- /.card-header -->
+                                    <!-- form start -->
+                                    <form role="form" action="<?php  echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
+                                        <div class="card-body">
+                                            <div class="form-group">
+                                                <label for="mobileNo">Mobile No</label>
+                                                <input type="text" class="form-control" id="mobileNo" name="mobileNo" placeholder="Mobile No" required>
+                                            </div>
+                                            <input type="hidden" class="form-control" name="customerId" required>
+                                            <div class="form-group">
+                                                <label for="fullName">Full Name</label>
+                                                <input type="text" class="form-control" name="fullName" placeholder="Enter Full Name" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="email">Email address</label>
+                                                <input type="email" class="form-control" name="email" placeholder="Enter Email" required>
+                                            </div>
+                                        </div>
+                                        <!-- /.card-body -->
+                                    </div>
+                                    <!-- /.card -->
+
+                                    <!-- from for motherboard details -->
+                                    <div class="card card-success">
+                                        <div class="card-header">
+                                            <h3 class="card-title">Inward For Storage Device</h3>
+                                        </div>
+                                        <!-- /.card-header -->
+                                        <!-- form start -->
+                                        <div class="card-body">
+                                            <div class="form-group">
+                                                <label>Select Storage Device *</label>
+                                                <select class="form-control" name="storageDevice" requierd>
+                                                    <option value="">Select Storage Device</option>
+                                                    <option>Hard Disk</option>
+                                                    <option>DVR</option>
+                                                    <option>Pen Drive</option>
+                                                    <option>Memory Card</option>
+                                                </select>
+                                            </div>
+                                            <div id="hardDiskDetail">
+                                                <div class="form-group">
+                                                    <label for="company">Serial No. *</label>
+                                                    <input type="text" class="form-control" name="serialNo" placeholder="Enter Serial No">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="company">Firmware No.</label>
+                                                    <input type="text" class="form-control" name="firmwareNo" placeholder="Enter Firmware No">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="company">WWN No.</label>
+                                                    <input type="text" class="form-control" name="wwnNo" placeholder="Enter WWN No">
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <div class="form-group">
+                                                            <label>Hard Disk Type *</label>
+                                                            <select class="form-control" name="hardDiskType">
+                                                                <option value="">Type Of Hard Disk</option>
+                                                                <option>Desktop</option>
+                                                                <option>Portable</option>
+                                                                <option>SSD</option>
+                                                                <option>Other</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="form-group">
+                                                            <label>SSD Type</label>
+                                                            <select class="form-control" name="ssdType">
+                                                                <option value="">Select Type Of SSD</option>
+                                                                <option>NVME</option>
+                                                                <option>SATA</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                              <label for="company">Company *</label>
+                                              <input type="text" class="form-control" name="company" placeholder="Enter Company" required>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-8">
+                                                    <div class="form-group">
+                                                        <label for="storageCapacity">Storage Capacity *</label>
+                                                        <input type="text" class="form-control" name="storageCapacity" placeholder="Enter Storage Capacity" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-4">
+                                                    <div class="form-group">
+                                                        <label>Unit *</label>
+                                                        <select class="form-control" name="storageUnit" required>
+                                                            <option>MB</option>
+                                                            <option>GB</option>
+                                                            <option>TB</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="company">Priority</label>
+                                                <input type="text" class="form-control" name="priority" placeholder="Enter Priority Folder Name">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Problem *</label>
+                                                <textarea class="form-control" rows="3" placeholder="Enter Problem" name="problem" required></textarea>
+                                            </div>
+                                        </div>
+                                        <!-- /.card-body -->
+                                        <div class="card-footer">
+                                            <button type="submit" class="btn btn-primary btn-block" name="submit">Submit</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- /.card -->
+
+                                <?php
+                                if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                                    if(isset($_POST['submit'])){
+                                        $customerId = $_POST['customerId'];
+                                        $name = $_POST['fullName'];
+                                        $email = $_POST['email'];
+                                        $phone = $_POST['mobileNo'];
+
+                                        $sql = "";
+                                        $storageDevice = $_POST['storageDevice'];  // type of device
+                                        $company = $_POST['company'];
+                                        $storageCapacity = $_POST['storageCapacity'];
+                                        $storageUnit = $_POST['storageUnit'];
+                                        $priority = $_POST['priority'];
+                                        $problem = $_POST['problem'];
+
+                                        // hard disk parameters
+                                        $serialNo = $_POST['serialNo'];
+                                        $firmwareNo = $_POST['firmwareNo'];
+                                        $wwnNo = $_POST['wwnNo'];
+                                        $hardDiskType = $_POST['hardDiskType'];
+                                        $ssdType = $_POST['ssdType'];
+
+                                        if($storageDevice == "Hard Disk"){
+                                            $sql = "INSERT INTO harddisk (customer_id,serial_no,firmware_no,wwn_no,type,ssd_type,company,storage_capacity,storage_unit,priority,problem)
+                                            VALUES ('$customerId','$serialNo','$firmwareNo','$wwnNo,'$hardDiskType','$ssdType','$company,'$storageCapacity','$storageUnit','$priority','$problem')";
+                                        }
+                                        elseif ($storageDevice == "DVR") {
+                                            $sql = "INSERT INTO dvr (customer_id,company,storage_capacity,storage_unit,priority,problem)
+                                            VALUES ('$customerId','$company','$storageCapacity','$storageUnit','$priority','$problem')";
+                                        }
+                                        elseif ($storageDevice == "Pen Drive") {
+                                            $sql = "INSERT INTO pendrive (customer_id,company,storage_capacity,storage_unit,priority,problem)
+                                            VALUES ('$customerId','$company','$storageCapacity','$storageUnit','$priority','$problem')";
+                                        }
+                                        elseif ($storageDevice == "Memory Card") {
+                                            $sql = "INSERT INTO memorycard (customer_id,company,storage_capacity,storage_unit,priority,problem)
+                                            VALUES ('$customerId','$company','$storageCapacity','$storageUnit','$priority','$problem')";
+                                        }
+
+                                        //$newId = 0;
+
+                                        // New customer entery and fetch Id
+                                        if($customerId=="0"){
+                                            $sql1 = "INSERT INTO customer (name,email,phone) VALUES ('$name','$email','$phone')";
+                                            if(mysqli_query($con, $sql1)){
+                                                $sql2 = "SELECT id FROM customer WHERE phone = '$phone'";
+                                                $result = mysqli_query($con, $sql2);
+                                                if(mysqli_num_rows($result) > 0) {
+                                                    $row = mysqli_fetch_assoc($result);
+                                                    $customerId = $row['id'];
+                                                    //new customer laptop insert
+                                                    echo $sql;
+                                                    if(mysqli_query($con, $sql)) {
+                                                        echo "<script>alert('Data Inserted');</script>";
+                                                    }
+                                                    else{
+                                                        echo "<script>alert('Error while inserting storage device data');</script>";
+                                                    }
+                                                }
+                                            }
+                                            else{
+                                                echo "<script>alert('Error while inserting user data');</script>";
+                                            }
+                                        }
+                                        else{
+                                            // existing customer laptop insert
+                                            echo $sql;
+                                            if(mysqli_query($con, $sql)) {
+                                                echo "<script>alert('Data Inserted');</script>";
+                                            }
+                                            else{
+                                                echo "<script>alert('Error while inserting storage device data');</script>";
+                                            }
+                                        }
+                                    }
+                                }
+                                ?>
+
+                            </div>
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+                <!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+        <!-- /.content -->
     </div>
-    <!-- Default to the left -->
-    <strong>Copyright &copy; 2014-2019 <a href="">Data Solutions</a>.</strong> All rights reserved.
-  </footer>
+    <!-- /.content-wrapper -->
+
+    <!-- Main Footer -->
+    <footer class="main-footer">
+        <!-- To the right -->
+        <div class="float-right d-none d-sm-inline">
+
+        </div>
+        <!-- Default to the left -->
+        <strong>Copyright &copy; 2014-2019 <a href="">Data Solutions</a>.</strong> All rights reserved.
+    </footer>
 </div>
 <!-- ./wrapper -->
 
@@ -269,54 +297,59 @@
 
 <script type="text/javascript">
 $(document).ready(function () {
-  bsCustomFileInput.init();
+    bsCustomFileInput.init();
 
-  $('select[name="hardDiskType"]').change(function(){
-    var selectedDiskType = $(this).children("option:selected").val();
-    if (selectedDevice == "SSD") {
-
-    }
-  });
-
-  $('#hardDiskDetail').hide();
-  $('select[name ="storageDevice"]').change(function(){
-    var selectedDevice = $(this).children("option:selected").val();
-    if (selectedDevice == "Hard Disk") {
-        $('#hardDiskDetail').fadeIn();
-        $('input[name="serialNo"]').attr('required',true);
-        //$('input[name="firmwareNo"]').attr('required',true);
-        //$('input[name="wwnNo"]').attr('required',true);
-    }
-    else {
-        $('#hardDiskDetail').fadeOut();
-        $('input[name="serialNo"]').removeAttr('required');
-        //$('input[name="firmwareNo"]').removeAttr('required');
-        //$('input[name="wwnNo"]').removeAttr('required');
-        
-    }
-  });
-
-  // AJAX code to fetch customer data
-  $("#mobileNo").blur(function(){
-    //alert(this.value);
-    $.post("getUserDetails.php",
-    {
-      mobileNo: this.value
-    },
-    function(data,status){
-        if(data=="0"){
-          //alert(data);
-          $('input[name="customerId"]').val(data);
-          //alert($('input[name="customerId"]').val());
+    $('select[name="hardDiskType"]').change(function(){
+        var selectedDiskType = $(this).children("option:selected").val();
+        if (selectedDiskType == "SSD") {
+            $('select[name="ssdType"]').removeAttr('disabled');
         }
         else{
-          var array = data.split(",");
-          $('input[name="customerId"]').val(array[0]);
-          $('input[name="fullName"]').val(array[1]);
-          $('input[name="email"]').val(array[2]);
+            $('select[name="ssdType"]').attr('disabled', true);
         }
     });
-  });
+
+    $('#hardDiskDetail').hide();
+    $('select[name ="storageDevice"]').change(function(){
+        var selectedDevice = $(this).children("option:selected").val();
+        if (selectedDevice == "Hard Disk") {
+            $('#hardDiskDetail').fadeIn();
+            $('input[name="serialNo"]').attr('required',true);
+            $('select[name="hardDiskType"]').attr('required',true);
+            //$('input[name="firmwareNo"]').attr('required',true);
+            //$('input[name="wwnNo"]').attr('required',true);
+        }
+        else {
+            $('#hardDiskDetail').fadeOut();
+            $('input[name="serialNo"]').removeAttr('required');
+            $('select[name="hardDiskType"]').removeAttr('required');
+            //$('input[name="firmwareNo"]').removeAttr('required');
+            //$('input[name="wwnNo"]').removeAttr('required');
+
+        }
+    });
+
+    // AJAX code to fetch customer data
+    $("#mobileNo").blur(function(){
+        //alert(this.value);
+        $.post("getUserDetails.php",
+        {
+            mobileNo: this.value
+        },
+        function(data,status){
+            if(data=="0"){
+                //alert(data);
+                $('input[name="customerId"]').val(data);
+                //alert($('input[name="customerId"]').val());
+            }
+            else{
+                var array = data.split(",");
+                $('input[name="customerId"]').val(array[0]);
+                $('input[name="fullName"]').val(array[1]);
+                $('input[name="email"]').val(array[2]);
+            }
+        });
+    });
 
 });
 </script>

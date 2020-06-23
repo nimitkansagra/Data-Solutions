@@ -140,6 +140,12 @@
                   <p>Motherboard</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="storageDevice.php" class="nav-link">
+                  <i class="fas fa-hdd nav-icon"></i>
+                  <p>Storage Devices</p>
+                </a>
+              </li>
             </ul>
           </li>
           <li class="nav-item">
