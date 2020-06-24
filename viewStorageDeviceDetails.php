@@ -71,7 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                         ?>
                         <div class="col-4">
                             <div class="form-group">
-                                <label for="userName">Customer Name</label>
+                                <label for="userName">Name</label>
                                 <input type="text" class="form-control" value="<?php echo $row['name']; ?>" disabled>
                             </div>
                         </div>
@@ -174,6 +174,8 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                                     </select>
                                 </div>
                             </div>
+                            <input type="hidden" name="type" value="<?php echo $type;?>">
+                            <input type="hidden" name="id" value="<?php echo $id;?>">
                         </div>
                 <?php
                     }
@@ -201,13 +203,45 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="company">Priority</label>
+                    <label for="priority">Priority</label>
                     <input type="text" class="form-control" value="<?php echo $row['priority'] ?>" disabled>
                 </div>
                 <div class="form-group">
                     <label>Problem *</label>
                     <textarea class="form-control" rows="3" disabled><?php echo $row['problem'] ?></textarea>
                 </div>
+                <form action="updateStorageDeviceStatus.php" method="POST">
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label for="company">Esimate</label>
+                                <input type="text" class="form-control" name="estimate" value="<?php echo $row['estimate'] ?>">
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <div class="form-group">
+                                <label>Status</label>
+                                <select class="form-control" name="status" value="<?php echo $row['status']?>" required>
+                                    <?php
+                                        $sqlStatus = "SELECT title FROM status";
+                                        $result = mysqli_query($con,$sqlStatus);
+                                        if(mysqli_num_rows($result)>0){
+                                            while ($row2 = mysqli_fetch_assoc($result)) {
+                                            ?>
+                                                <option value="<?php echo $row2['title']; ?>" <?php if ($row2['title']==$row['status']) echo "selected"; else echo ""; ?> ><?php echo $row2['title']; ?></option>
+                                            <?php
+                                            }
+                                        }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" name="id" value="<?php echo $id; ?>">
+                    <input type="hidden" name="type" value="<?php echo $type; ?>">
+                    <input type="hidden" name="customerId" value="<?php echo $customerId; ?>">
+                    <button type="submit" class="btn btn-primary btn-block" name="submit">Update</button>
+                </form>
                 <?php
                     }
                     else {
@@ -246,26 +280,11 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 <script src="plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- DataTables -->
-<script src="plugins/datatables/jquery.dataTables.js"></script>
-<script src="plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
 <!-- page script -->
-<script>
-/*$(function () {
-    $("#example1").DataTable();
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-    });
-});*/
-</script>
 </body>
 </html>

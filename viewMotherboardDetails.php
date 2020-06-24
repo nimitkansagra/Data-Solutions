@@ -137,6 +137,37 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                     <label>Problem</label>
                     <textarea class="form-control" rows="3" disabled><?php echo $row['problem']; ?></textarea>
                 </div>
+                <form action="updateLaptopStatus.php" method="POST">
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label for="company">Esimate</label>
+                                <input type="text" class="form-control" name="estimate" value="<?php echo $row['estimate'] ?>">
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <div class="form-group">
+                                <label>Status</label>
+                                <select class="form-control" name="status" value="<?php echo $row['status']?>" required>
+                                    <?php
+                                        $sqlStatus = "SELECT title FROM status";
+                                        $result = mysqli_query($con,$sqlStatus);
+                                        if(mysqli_num_rows($result)>0){
+                                            while ($row2 = mysqli_fetch_assoc($result)) {
+                                            ?>
+                                                <option value="<?php echo $row2['title']; ?>" <?php if ($row2['title']==$row['status']) echo "selected"; else echo ""; ?> ><?php echo $row2['title']; ?></option>
+                                            <?php
+                                            }
+                                        }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" name="id" value="<?php echo $id; ?>">
+                    <input type="hidden" name="customerId" value="<?php echo $customerId; ?>">
+                    <button type="submit" class="btn btn-primary btn-block" name="submit">Update</button>
+                </form>
                 <?php
                     }
                     else {

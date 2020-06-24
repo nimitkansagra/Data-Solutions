@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 23, 2020 at 03:41 PM
+-- Generation Time: Jun 24, 2020 at 02:40 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.2.30
 
@@ -91,7 +91,7 @@ CREATE TABLE `dvr` (
 --
 
 INSERT INTO `dvr` (`id`, `customer_id`, `company`, `storage_capacity`, `storage_unit`, `priority`, `problem`, `estimate`, `status`, `inward`, `outward`, `returned`) VALUES
-(1, 3, 'wd', 200, 'GB', 'asdf', 'fhjkljhk sdfg', 0, 0, '2020-06-22 15:59:32', NULL, 0);
+(1, 3, 'wd', 200, 'GB', 'asdf', 'fhjkljhk sdfg', 4000, 0, '2020-06-22 15:59:32', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -134,11 +134,18 @@ CREATE TABLE `harddisk` (
   `priority` varchar(64) NOT NULL,
   `problem` text NOT NULL,
   `estimate` int(11) NOT NULL,
-  `status` tinyint(4) NOT NULL,
+  `status` text NOT NULL,
   `inward` timestamp NOT NULL DEFAULT current_timestamp(),
   `outward` timestamp NULL DEFAULT NULL,
   `returned` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `harddisk`
+--
+
+INSERT INTO `harddisk` (`id`, `customer_id`, `serial_no`, `firmware_no`, `wwn_no`, `type`, `ssd_type`, `company`, `storage_capacity`, `storage_unit`, `priority`, `problem`, `estimate`, `status`, `inward`, `outward`, `returned`) VALUES
+(1, 3, 'WDJAOK988655', 'WDJ6688BLKE', '', 'Desktop', '', 'WD', 1, 'TB', '', 'Head not working', 3004, 'Recovery completed', '2020-06-24 05:52:12', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -155,8 +162,8 @@ CREATE TABLE `laptop` (
   `with_battery` tinyint(4) NOT NULL,
   `with_harddisk` tinyint(4) NOT NULL,
   `problem` text NOT NULL,
-  `quotation` int(11) NOT NULL,
-  `status` tinyint(4) NOT NULL DEFAULT 0,
+  `estimate` int(11) NOT NULL,
+  `status` text NOT NULL,
   `inward` timestamp NOT NULL DEFAULT current_timestamp(),
   `outward` timestamp NULL DEFAULT NULL,
   `returned` tinyint(4) NOT NULL
@@ -166,16 +173,16 @@ CREATE TABLE `laptop` (
 -- Dumping data for table `laptop`
 --
 
-INSERT INTO `laptop` (`id`, `customer_id`, `company`, `model_no`, `with_adapter`, `with_battery`, `with_harddisk`, `problem`, `quotation`, `status`, `inward`, `outward`, `returned`) VALUES
-(1, 1, 'HP', '1', 1, 0, 1, 'prblem', 0, 0, '2020-06-19 10:36:28', NULL, 0),
-(2, 1, 'dell', '98', 1, 0, 0, 'Problem2', 0, 0, '2020-06-19 10:36:28', NULL, 0),
-(4, 1, 'Asus', 'Rog 3', 0, 0, 0, 'Probmlemo', 0, 0, '2020-06-19 10:36:28', NULL, 0),
-(5, 1, 'Samsung', 'S231', 0, 0, 0, 'Problemo2', 0, 0, '2020-06-19 10:36:28', NULL, 0),
-(6, 1, 'Samsung', 'S231', 0, 0, 0, 'Problemo2', 0, 0, '2020-06-19 10:36:28', NULL, 0),
-(7, 1, 'Samsung', 'S231', 0, 0, 0, 'Problemo2', 0, 0, '2020-06-19 10:36:28', NULL, 0),
-(8, 1, 'Samsung', 'S000', 1, 0, 0, 'Problem', 0, 0, '2020-06-19 10:36:28', NULL, 0),
-(9, 1, 'Samsung', 'S322', 0, 0, 0, 'Problito', 0, 0, '2020-06-19 10:36:28', NULL, 0),
-(10, 2, 'WD', 'WD31234', 1, 0, 0, 'Not working', 0, 0, '2020-06-22 14:18:15', NULL, 0);
+INSERT INTO `laptop` (`id`, `customer_id`, `company`, `model_no`, `with_adapter`, `with_battery`, `with_harddisk`, `problem`, `estimate`, `status`, `inward`, `outward`, `returned`) VALUES
+(1, 1, 'HP', '1', 1, 0, 1, 'prblem', 5600, 'Waiting for action', '2020-06-19 10:36:28', NULL, 0),
+(2, 1, 'dell', '98', 1, 0, 0, 'Problem2', 2000, 'Rejected', '2020-06-19 10:36:28', NULL, 0),
+(4, 1, 'Asus', 'Rog 3', 0, 0, 0, 'Probmlemo', 0, '0', '2020-06-19 10:36:28', NULL, 0),
+(5, 1, 'Samsung', 'S231', 0, 0, 0, 'Problemo2', 0, '0', '2020-06-19 10:36:28', NULL, 0),
+(6, 1, 'Samsung', 'S231', 0, 0, 0, 'Problemo2', 0, '0', '2020-06-19 10:36:28', NULL, 0),
+(7, 1, 'Samsung', 'S231', 0, 0, 0, 'Problemo2', 0, '0', '2020-06-19 10:36:28', NULL, 0),
+(8, 1, 'Samsung', 'S000', 1, 0, 0, 'Problem', 0, '0', '2020-06-19 10:36:28', NULL, 0),
+(9, 1, 'Samsung', 'S322', 0, 0, 0, 'Problito', 0, '0', '2020-06-19 10:36:28', NULL, 0),
+(10, 2, 'WD', 'WD31234', 1, 0, 0, 'Not working', 0, '0', '2020-06-22 14:18:15', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -213,7 +220,8 @@ CREATE TABLE `motherboard` (
   `with_cpu` tinyint(4) NOT NULL,
   `with_fan` tinyint(4) NOT NULL,
   `problem` text NOT NULL,
-  `status` tinyint(4) NOT NULL,
+  `estimate` int(11) NOT NULL,
+  `status` text NOT NULL,
   `inward` timestamp NOT NULL DEFAULT current_timestamp(),
   `outward` timestamp NULL DEFAULT NULL,
   `returned` tinyint(4) NOT NULL
@@ -223,8 +231,8 @@ CREATE TABLE `motherboard` (
 -- Dumping data for table `motherboard`
 --
 
-INSERT INTO `motherboard` (`id`, `customer_id`, `company`, `name`, `with_ram`, `with_cpu`, `with_fan`, `problem`, `status`, `inward`, `outward`, `returned`) VALUES
-(1, 2, 'Asus', 'LGA11', 0, 1, 1, 'Problemo', 0, '2020-06-19 13:37:00', NULL, 0);
+INSERT INTO `motherboard` (`id`, `customer_id`, `company`, `name`, `with_ram`, `with_cpu`, `with_fan`, `problem`, `estimate`, `status`, `inward`, `outward`, `returned`) VALUES
+(1, 2, 'Asus', 'LGA11', 0, 1, 1, 'Problemo', 0, '0', '2020-06-19 13:37:00', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -246,6 +254,31 @@ CREATE TABLE `pendrive` (
   `outward` timestamp NULL DEFAULT NULL,
   `returned` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `status`
+--
+
+CREATE TABLE `status` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `title` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `status`
+--
+
+INSERT INTO `status` (`id`, `title`) VALUES
+(1, 'Waiting for action'),
+(2, 'In progress'),
+(3, 'Recovery completed'),
+(4, 'Remote session completed'),
+(5, 'In transit'),
+(6, 'Data delivered'),
+(7, 'Rejected'),
+(8, 'Closed');
 
 --
 -- Indexes for dumped tables
@@ -316,6 +349,12 @@ ALTER TABLE `pendrive`
   ADD KEY `customer_id` (`customer_id`);
 
 --
+-- Indexes for table `status`
+--
+ALTER TABLE `status`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -347,7 +386,7 @@ ALTER TABLE `failed_login`
 -- AUTO_INCREMENT for table `harddisk`
 --
 ALTER TABLE `harddisk`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `laptop`
@@ -372,6 +411,12 @@ ALTER TABLE `motherboard`
 --
 ALTER TABLE `pendrive`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `status`
+--
+ALTER TABLE `status`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Constraints for dumped tables
