@@ -76,12 +76,12 @@
                 ?>
                 <tr>
                   <td>
-                      <a href="viewDvrDetails.php?customerId=<?php echo $row['customer_id']; ?>&id=<?php echo $row['id']; ?>">
+                      <a href="viewStorageDeviceDetails.php?customerId=<?php echo $row['customer_id']; ?>&id=<?php echo $row['id']; ?>&type=dvr">
                         <?php echo $row['id']; ?>
                       </a>
                   </td>
                   <td>
-                    <a href="viewDvrDetails.php?customerId=<?php echo $row['customer_id']; ?>&id=<?php echo $row['id']; ?>">
+                    <a href="viewStorageDeviceDetails.php?customerId=<?php echo $row['customer_id']; ?>&id=<?php echo $row['id']; ?>&type=dvr">
                       <?php echo $row['customer_name']; ?>
                     </a>
                   </td>

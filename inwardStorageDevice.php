@@ -200,11 +200,14 @@ include('includes/connection.php');
                                         $firmwareNo = $_POST['firmwareNo'];
                                         $wwnNo = $_POST['wwnNo'];
                                         $hardDiskType = $_POST['hardDiskType'];
-                                        $ssdType = $_POST['ssdType'];
+                                        $ssdType = "";
+                                        if ($_POST['ssdType']) {
+                                            $ssdType = $_POST['ssdType'];
+                                        }
 
                                         if($storageDevice == "Hard Disk"){
                                             $sql = "INSERT INTO harddisk (customer_id,serial_no,firmware_no,wwn_no,type,ssd_type,company,storage_capacity,storage_unit,priority,problem)
-                                            VALUES ('$customerId','$serialNo','$firmwareNo','$wwnNo,'$hardDiskType','$ssdType','$company,'$storageCapacity','$storageUnit','$priority','$problem')";
+                                            VALUES ('$customerId','$serialNo','$firmwareNo','$wwnNo','$hardDiskType','$ssdType','$company','$storageCapacity','$storageUnit','$priority','$problem')";
                                         }
                                         elseif ($storageDevice == "DVR") {
                                             $sql = "INSERT INTO dvr (customer_id,company,storage_capacity,storage_unit,priority,problem)
@@ -302,10 +305,10 @@ $(document).ready(function () {
     $('select[name="hardDiskType"]').change(function(){
         var selectedDiskType = $(this).children("option:selected").val();
         if (selectedDiskType == "SSD") {
-            $('select[name="ssdType"]').removeAttr('disabled');
+            $('select[name="ssdType"]').removeAttr('readonly');
         }
         else{
-            $('select[name="ssdType"]').attr('disabled', true);
+            $('select[name="ssdType"]').attr('readonly', true);
         }
     });
 

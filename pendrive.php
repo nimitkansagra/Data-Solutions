@@ -76,12 +76,12 @@
                 ?>
                 <tr>
                   <td>
-                      <a href="viewPendriveDetails.php?customerId=<?php echo $row['customer_id']; ?>&id=<?php echo $row['id']; ?>">
+                      <a href="viewStorageDeviceDetails.php?customerId=<?php echo $row['customer_id']; ?>&id=<?php echo $row['id']; ?>&type=pendrive">
                         <?php echo $row['id']; ?>
                       </a>
                   </td>
                   <td>
-                    <a href="viewPendriveDetails.php?customerId=<?php echo $row['customer_id']; ?>&id=<?php echo $row['id']; ?>">
+                    <a href="viewStorageDeviceDetails.php?customerId=<?php echo $row['customer_id']; ?>&id=<?php echo $row['id']; ?>&type=pendrive">
                       <?php echo $row['customer_name']; ?>
                     </a>
                   </td>
