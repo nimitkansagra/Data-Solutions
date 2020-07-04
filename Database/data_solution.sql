@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 24, 2020 at 02:40 PM
+-- Generation Time: Jul 04, 2020 at 02:43 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.2.30
 
@@ -79,7 +79,7 @@ CREATE TABLE `dvr` (
   `storage_unit` varchar(3) NOT NULL,
   `priority` varchar(64) NOT NULL,
   `problem` text NOT NULL,
-  `estimate` int(11) NOT NULL,
+  `estimate` int(11) NOT NULL DEFAULT 2000,
   `status` tinyint(4) NOT NULL,
   `inward` timestamp NOT NULL DEFAULT current_timestamp(),
   `outward` timestamp NULL DEFAULT NULL,
@@ -91,7 +91,7 @@ CREATE TABLE `dvr` (
 --
 
 INSERT INTO `dvr` (`id`, `customer_id`, `company`, `storage_capacity`, `storage_unit`, `priority`, `problem`, `estimate`, `status`, `inward`, `outward`, `returned`) VALUES
-(1, 3, 'wd', 200, 'GB', 'asdf', 'fhjkljhk sdfg', 4000, 0, '2020-06-22 15:59:32', NULL, 0);
+(1, 3, 'wd', 200, 'GB', 'asdf', 'fhjkljhk sdfg', 4000, 0, '2020-06-22 15:59:32', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -133,7 +133,7 @@ CREATE TABLE `harddisk` (
   `storage_unit` varchar(3) NOT NULL,
   `priority` varchar(64) NOT NULL,
   `problem` text NOT NULL,
-  `estimate` int(11) NOT NULL,
+  `estimate` int(11) NOT NULL DEFAULT 2000,
   `status` text NOT NULL,
   `inward` timestamp NOT NULL DEFAULT current_timestamp(),
   `outward` timestamp NULL DEFAULT NULL,
@@ -162,7 +162,7 @@ CREATE TABLE `laptop` (
   `with_battery` tinyint(4) NOT NULL,
   `with_harddisk` tinyint(4) NOT NULL,
   `problem` text NOT NULL,
-  `estimate` int(11) NOT NULL,
+  `estimate` int(11) NOT NULL DEFAULT 1500,
   `status` text NOT NULL,
   `inward` timestamp NOT NULL DEFAULT current_timestamp(),
   `outward` timestamp NULL DEFAULT NULL,
@@ -197,7 +197,7 @@ CREATE TABLE `memorycard` (
   `storage_capacity` mediumint(9) NOT NULL,
   `storage_unit` varchar(3) NOT NULL,
   `priority` varchar(64) NOT NULL,
-  `estimate` int(11) NOT NULL,
+  `estimate` int(11) NOT NULL DEFAULT 2000,
   `problem` text NOT NULL,
   `status` tinyint(4) NOT NULL,
   `inward` timestamp NOT NULL DEFAULT current_timestamp(),
@@ -220,7 +220,7 @@ CREATE TABLE `motherboard` (
   `with_cpu` tinyint(4) NOT NULL,
   `with_fan` tinyint(4) NOT NULL,
   `problem` text NOT NULL,
-  `estimate` int(11) NOT NULL,
+  `estimate` int(11) NOT NULL DEFAULT 350,
   `status` text NOT NULL,
   `inward` timestamp NOT NULL DEFAULT current_timestamp(),
   `outward` timestamp NULL DEFAULT NULL,
@@ -232,7 +232,7 @@ CREATE TABLE `motherboard` (
 --
 
 INSERT INTO `motherboard` (`id`, `customer_id`, `company`, `name`, `with_ram`, `with_cpu`, `with_fan`, `problem`, `estimate`, `status`, `inward`, `outward`, `returned`) VALUES
-(1, 2, 'Asus', 'LGA11', 0, 1, 1, 'Problemo', 0, '0', '2020-06-19 13:37:00', NULL, 0);
+(1, 2, 'Asus', 'LGA11', 0, 1, 1, 'Problemo', 350, 'Rejected', '2020-06-19 13:37:00', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -248,7 +248,7 @@ CREATE TABLE `pendrive` (
   `storage_unit` varchar(3) NOT NULL,
   `priority` varchar(64) NOT NULL,
   `problem` text NOT NULL,
-  `estimate` int(11) NOT NULL,
+  `estimate` int(11) NOT NULL DEFAULT 2000,
   `status` tinyint(4) NOT NULL,
   `inward` timestamp NOT NULL DEFAULT current_timestamp(),
   `outward` timestamp NULL DEFAULT NULL,

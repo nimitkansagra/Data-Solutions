@@ -21,6 +21,11 @@
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <style media="screen">
+      .badge{
+          font-size: 90%;
+      }
+  </style>
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -64,6 +69,8 @@
                   <th>Status</th>
                   <th>Inward</th>
                   <th>Outward</th>
+                  <th>Returned</th>
+                  <th></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -90,6 +97,22 @@
                   <td><?php echo $row['status']; ?></td>
                   <td><?php echo $row['inward']; ?></td>
                   <td><?php echo $row['outward']; ?></td>
+                  <td>
+                      <span class="badge">
+                      <?php
+                          if($row['returned']==1) {
+                              echo '<span class="badge bg-danger">Yes</span>';
+                          }
+                          else{
+                              echo '<span class="badge bg-success">No</span>';
+                          }
+                      ?>
+                  </td>
+                  <td>
+                      <a href="outward.php?customerId=<?php echo $row['customer_id'];?>&id=<?php echo $row['id'];?>&type=motherboard">
+                          <i class="fas fa-minus-circle text-danger"></i>
+                      </a>
+                  </td>
                 </tr>
                 <?php
                     }
@@ -106,6 +129,8 @@
                   <th>Status</th>
                   <th>Inward</th>
                   <th>Outward</th>
+                  <th>Status</th>
+                  <th></th>
                 </tr>
                 </tfoot>
               </table>

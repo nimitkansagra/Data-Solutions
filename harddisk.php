@@ -21,6 +21,11 @@ include('includes/connection.php');
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <style media="screen">
+        .badge{
+            font-size: 90%;
+        }
+    </style>
 </head>
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
@@ -108,7 +113,7 @@ include('includes/connection.php');
                                                     ?>
                                                 </td>
                                                 <td>
-                                                    <a href="outwardStorageDevice.php?customerId=<?php echo $row['customer_id'];?>&id=<?php echo $row['id'];?>&type=harddisk">
+                                                    <a href="outward.php?customerId=<?php echo $row['customer_id'];?>&id=<?php echo $row['id'];?>&type=harddisk">
                                                         <i class="fas fa-minus-circle text-danger"></i>
                                                     </a>
                                                 </td>
@@ -148,7 +153,7 @@ include('includes/connection.php');
     </div>
     <!-- /.content-wrapper -->
     <?php include 'includes/footer.php'; ?>
-    
+
 </div>
 <!-- ./wrapper -->
 
