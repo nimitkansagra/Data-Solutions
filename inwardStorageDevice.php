@@ -114,7 +114,7 @@ include('includes/connection.php');
                                                     </div>
                                                 </div>
                                             </div>
-                                            
+
                                             <div id="hardDiskDetail">
                                                 <div class="row">
                                                     <div class="form-group col-12 col-sm-12 col-md-4">
@@ -287,14 +287,8 @@ include('includes/connection.php');
     <!-- /.content-wrapper -->
 
     <!-- Main Footer -->
-    <footer class="main-footer">
-        <!-- To the right -->
-        <div class="float-right d-none d-sm-inline">
-
-        </div>
-        <!-- Default to the left -->
-        <strong>Copyright &copy; 2014-2019 <a href="">Data Solutions</a>.</strong> All rights reserved.
-    </footer>
+    <?php include 'includes/footer.php'; ?>
+    
 </div>
 <!-- ./wrapper -->
 
