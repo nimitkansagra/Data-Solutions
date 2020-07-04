@@ -66,18 +66,20 @@ include('includes/connection.php');
                                     <!-- form start -->
                                     <form role="form" action="<?php  echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
                                         <div class="card-body">
-                                            <div class="form-group">
-                                                <label for="mobileNo">Mobile No</label>
-                                                <input type="text" class="form-control" id="mobileNo" name="mobileNo" placeholder="Mobile No" required>
-                                            </div>
-                                            <input type="hidden" class="form-control" name="customerId" required>
-                                            <div class="form-group">
-                                                <label for="fullName">Full Name</label>
-                                                <input type="text" class="form-control" name="fullName" placeholder="Enter Full Name" required>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="email">Email address</label>
-                                                <input type="email" class="form-control" name="email" placeholder="Enter Email" required>
+                                        <div class="row">
+                                                <div class="form-group col-12 col-sm-12 col-md-4">
+                                                    <label for="mobileNo">Mobile No *</label>
+                                                    <input type="text" class="form-control" name="mobileNo" id="mobileNo" placeholder="Mobile No" required>
+                                                </div>
+                                                <input type="hidden" class="form-control" name="customerId" required>
+                                                <div class="form-group col-12 col-sm-12 col-md-4">
+                                                    <label for="fullName">Full Name *</label>
+                                                    <input type="text" class="form-control" name="fullName" placeholder="Enter Full Name" required>
+                                                </div>
+                                                <div class="form-group col-12 col-sm-12 col-md-4">
+                                                    <label for="email">Email address</label>
+                                                    <input type="email" class="form-control" name="email" placeholder="Enter Email">
+                                                </div>
                                             </div>
                                         </div>
                                         <!-- /.card-body -->
@@ -92,66 +94,77 @@ include('includes/connection.php');
                                         <!-- /.card-header -->
                                         <!-- form start -->
                                         <div class="card-body">
-                                            <div class="form-group">
-                                                <label>Select Storage Device *</label>
-                                                <select class="form-control" name="storageDevice" requierd>
-                                                    <option value="">Select Storage Device</option>
-                                                    <option>Hard Disk</option>
-                                                    <option>DVR</option>
-                                                    <option>Pen Drive</option>
-                                                    <option>Memory Card</option>
-                                                </select>
+                                            <div class="row">
+                                                <div class="form-group col-12 col-sm-12 col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Select Storage Device *</label>
+                                                        <select class="form-control" name="storageDevice" requierd>
+                                                            <option value="">Select Storage Device</option>
+                                                            <option>Hard Disk</option>
+                                                            <option>DVR</option>
+                                                            <option>Pen Drive</option>
+                                                            <option>Memory Card</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group col-12 col-sm-12 col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="company">Company *</label>
+                                                        <input type="text" class="form-control" name="company" placeholder="Enter Company" required>
+                                                    </div>
+                                                </div>
                                             </div>
+                                            
                                             <div id="hardDiskDetail">
-                                                <div class="form-group">
-                                                    <label for="company">Serial No. *</label>
-                                                    <input type="text" class="form-control" name="serialNo" placeholder="Enter Serial No">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="company">Firmware No.</label>
-                                                    <input type="text" class="form-control" name="firmwareNo" placeholder="Enter Firmware No">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="company">WWN No.</label>
-                                                    <input type="text" class="form-control" name="wwnNo" placeholder="Enter WWN No">
+                                                <div class="row">
+                                                    <div class="form-group col-12 col-sm-12 col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="company">Serial No. *</label>
+                                                            <input type="text" class="form-control" name="serialNo" placeholder="Enter Serial No">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group col-12 col-sm-12 col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="company">Firmware No.</label>
+                                                            <input type="text" class="form-control" name="firmwareNo" placeholder="Enter Firmware No">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group col-12 col-sm-12 col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="company">WWN No.</label>
+                                                            <input type="text" class="form-control" name="wwnNo" placeholder="Enter WWN No">
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-6">
-                                                        <div class="form-group">
-                                                            <label>Hard Disk Type *</label>
-                                                            <select class="form-control" name="hardDiskType">
-                                                                <option value="">Type Of Hard Disk</option>
-                                                                <option>Desktop</option>
-                                                                <option>Portable</option>
-                                                                <option>SSD</option>
-                                                                <option>Other</option>
-                                                            </select>
-                                                        </div>
+                                                    <div class="form-group col-12 col-sm-12 col-md-6">
+                                                        <label>Hard Disk Type *</label>
+                                                        <select class="form-control" name="hardDiskType">
+                                                            <option value="">Type Of Hard Disk</option>
+                                                            <option>Desktop</option>
+                                                            <option>Portable</option>
+                                                            <option>SSD</option>
+                                                            <option>Other</option>
+                                                        </select>
                                                     </div>
-                                                    <div class="col-6">
-                                                        <div class="form-group">
-                                                            <label>SSD Type</label>
-                                                            <select class="form-control" name="ssdType">
-                                                                <option value="">Select Type Of SSD</option>
-                                                                <option>NVME</option>
-                                                                <option>SATA</option>
-                                                            </select>
-                                                        </div>
+                                                    <div class="form-group col-12 col-sm-12 col-md-6">
+                                                        <label>SSD Type</label>
+                                                        <select class="form-control" name="ssdType">
+                                                            <option value="">Select Type Of SSD</option>
+                                                            <option>NVME</option>
+                                                            <option>SATA</option>
+                                                        </select>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="form-group">
-                                              <label for="company">Company *</label>
-                                              <input type="text" class="form-control" name="company" placeholder="Enter Company" required>
-                                            </div>
                                             <div class="row">
-                                                <div class="col-8">
+                                                <div class="col-12 col-sm-12 col-md-8">
                                                     <div class="form-group">
                                                         <label for="storageCapacity">Storage Capacity *</label>
                                                         <input type="text" class="form-control" name="storageCapacity" placeholder="Enter Storage Capacity" required>
                                                     </div>
                                                 </div>
-                                                <div class="col-4">
+                                                <div class="col-12 col-sm-12 col-md-4">
                                                     <div class="form-group">
                                                         <label>Unit *</label>
                                                         <select class="form-control" name="storageUnit" required>

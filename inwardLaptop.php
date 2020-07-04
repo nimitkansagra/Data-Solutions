@@ -71,18 +71,20 @@ include('includes/connection.php');
                                     <!-- form start -->
                                     <form role="form" action="<?php  echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
                                         <div class="card-body">
-                                            <div class="form-group">
-                                                <label for="mobileNo">Mobile No *</label>
-                                                <input type="text" class="form-control" name="mobileNo" id="mobileNo" placeholder="Mobile No" required>
-                                            </div>
-                                            <input type="hidden" class="form-control" name="customerId" required>
-                                            <div class="form-group">
-                                                <label for="fullName">Full Name *</label>
-                                                <input type="text" class="form-control" name="fullName" placeholder="Enter Full Name" required>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="email">Email address</label>
-                                                <input type="email" class="form-control" name="email" placeholder="Enter Email">
+                                            <div class="row">
+                                                <div class="form-group col-12 col-sm-12 col-md-4">
+                                                    <label for="mobileNo">Mobile No *</label>
+                                                    <input type="text" class="form-control" name="mobileNo" id="mobileNo" placeholder="Mobile No" required>
+                                                </div>
+                                                <input type="hidden" class="form-control" name="customerId" required>
+                                                <div class="form-group col-12 col-sm-12 col-md-4">
+                                                    <label for="fullName">Full Name *</label>
+                                                    <input type="text" class="form-control" name="fullName" placeholder="Enter Full Name" required>
+                                                </div>
+                                                <div class="form-group col-12 col-sm-12 col-md-4">
+                                                    <label for="email">Email address</label>
+                                                    <input type="email" class="form-control" name="email" placeholder="Enter Email">
+                                                </div>   
                                             </div>
                                         </div>
                                         <!-- /.card-body -->
@@ -95,13 +97,15 @@ include('includes/connection.php');
                                             <h3 class="card-title">Inward For Laptops</h3>
                                         </div>
                                         <div class="card-body">
-                                            <div class="form-group">
-                                                <label for="company">Company</label>
-                                                <input type="text" class="form-control" name="company" placeholder="Enter Full Name" required>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="motherboardName">Model No</label>
-                                                <input type="text" class="form-control" name="modelNo" placeholder="Enter Email" required>
+                                            <div class="row">
+                                                <div class="form-group col-12 col-sm-12 col-md-6">
+                                                    <label for="company">Company</label>
+                                                    <input type="text" class="form-control" name="company" placeholder="Enter Full Name" required>
+                                                </div>
+                                                <div class="form-group col-12 col-sm-12 col-md-6">
+                                                    <label for="motherboardName">Model No</label>
+                                                    <input type="text" class="form-control" name="modelNo" placeholder="Enter Email" required>
+                                                </div>
                                             </div>
                                             <div class="form-check">
                                                 <input type="checkbox" class="form-check-input" name="withAdapter" value="1">

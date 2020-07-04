@@ -63,10 +63,11 @@ include('includes/connection.php');
                                         <th>Type</th>
                                         <th>Capacity</th>
                                         <th>Problem</th>
-                                        <th>Priority</th>
                                         <th>Status</th>
                                         <th>Inward</th>
                                         <th>Outward</th>
+                                        <th>Returned</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -92,10 +93,25 @@ include('includes/connection.php');
                                                 <td><?php echo $row['type']; ?></td>
                                                 <td><?php echo $row['storage_capacity']." ".$row['storage_unit']; ?></td>
                                                 <td><?php echo $row['problem']; ?></td>
-                                                <td><?php echo $row['priority']; ?></td>
                                                 <td><?php echo $row['status']; ?></td>
                                                 <td><?php echo $row['inward']; ?></td>
                                                 <td><?php echo $row['outward']; ?></td>
+                                                <td>
+                                                    <span class="badge">
+                                                    <?php 
+                                                        if($row['returned']==1) {
+                                                            echo '<span class="badge bg-danger">Yes</span>';
+                                                        } 
+                                                        else{
+                                                            echo '<span class="badge bg-success">No</span>';
+                                                        }
+                                                    ?>
+                                                </td>
+                                                <td>
+                                                    <a href="outwardStorageDevice.php?customerId=<?php echo $row['customer_id'];?>&id=<?php echo $row['id'];?>&type=harddisk">
+                                                        <i class="fas fa-minus-circle text-danger"></i>
+                                                    </a>
+                                                </td>
                                             </tr>
                                             <?php
                                         }
@@ -111,10 +127,11 @@ include('includes/connection.php');
                                         <th>Type</th>
                                         <th>Capacity</th>
                                         <th>Problem</th>
-                                        <th>Priority</th>
                                         <th>Status</th>
                                         <th>Inward</th>
                                         <th>Outward</th>
+                                        <th>Returned</th>
+                                        <th></th>
                                     </tr>
                                 </tfoot>
                             </table>
