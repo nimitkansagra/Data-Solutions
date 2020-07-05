@@ -11,7 +11,7 @@
             $returned = 1;
         }
 
-        $sql = "UPDATE ".$type." SET returned = '$returned', status = '$status' WHERE id = '$id'";
+        $sql = "UPDATE ".$type." SET outward = CURRENT_TIMESTAMP(), returned = '$returned', status = '$status' WHERE id = '$id'";
         //echo $sql;
         if (mysqli_query($con,$sql)) {
             echo "<script>alert('Updated !');</script>";

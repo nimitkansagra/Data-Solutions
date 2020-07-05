@@ -161,7 +161,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                                     </div>
                                     <input type="hidden" name="id" value="<?php echo $id; ?>">
                                     <input type="hidden" name="customerId" value="<?php echo $customerId; ?>">
-                                    <button type="submit" class="btn btn-primary btn-block" name="submit">Update</button>
+                                    <button type="submit" class="btn btn-primary btn-block" name="submit" <?php if ($row['status']=="Rejected"||$row['status']=="Closed"){ echo "disabled";} ?>>Update</button>
                                 </form>
                                 <?php
                             }

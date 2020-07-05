@@ -25,6 +25,12 @@
       .badge{
           font-size: 90%;
       }
+      th{
+          font-size: 90%;
+      }
+      td{
+          font-size: 90%;
+      }
   </style>
 </head>
 <body class="hold-transition sidebar-mini">
@@ -111,9 +117,11 @@
                       ?>
                   </td>
                   <td>
+                      <?php if (empty($row['outward'])){ ?>
                       <a href="outward.php?customerId=<?php echo $row['customer_id'];?>&id=<?php echo $row['id'];?>&type=dvr">
                           <i class="fas fa-minus-circle text-danger"></i>
                       </a>
+                      <?php } ?>
                   </td>
                 </tr>
                 <?php

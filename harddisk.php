@@ -25,6 +25,12 @@ include('includes/connection.php');
         .badge{
             font-size: 90%;
         }
+        th{
+            font-size: 85%;
+        }
+        td{
+            font-size: 85%;
+        }
     </style>
 </head>
 <body class="hold-transition sidebar-mini">
@@ -113,9 +119,11 @@ include('includes/connection.php');
                                                     ?>
                                                 </td>
                                                 <td>
+                                                    <?php if (empty($row['outward'])){ ?>
                                                     <a href="outward.php?customerId=<?php echo $row['customer_id'];?>&id=<?php echo $row['id'];?>&type=harddisk">
                                                         <i class="fas fa-minus-circle text-danger"></i>
                                                     </a>
+                                                    <?php } ?>
                                                 </td>
                                             </tr>
                                             <?php
