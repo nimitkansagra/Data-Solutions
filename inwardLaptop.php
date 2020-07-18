@@ -162,7 +162,12 @@ include('includes/connection.php');
 
                                         // New customer entery and fetch Id
                                         if($customerId=="0"){
-                                            $sql1 = "INSERT INTO customer (name,email,phone) VALUES ('$name','$email','$phone')";
+                                            $sql1 = "";
+                                            if(empty($email)){
+                                                $sql1 = "INSERT INTO customer (name,phone) VALUES ('$name','$phone')";
+                                            }else{
+                                                $sql1 = "INSERT INTO customer (name,email,phone) VALUES ('$name','$email','$phone')";
+                                            }
                                             if(mysqli_query($con, $sql1)){
                                                 $sql2 = "SELECT id FROM customer WHERE phone = '$phone'";
                                                 $result = mysqli_query($con, $sql2);
@@ -176,12 +181,18 @@ include('includes/connection.php');
                                                         echo "<script>alert('Data Inserted');</script>";
                                                     }
                                                     else{
-                                                        echo "<script>alert('Error while inserting laptop data');</script>";
+                                                        //echo "<script>alert('Error while inserting laptop data');</script>";
+                                                        ?>
+                                                        <script>alert("<?php echo $err; ?>");</script>
+                                                        <?php
                                                     }
                                                 }
                                             }
                                             else{
-                                                echo "<script>alert('Error while inserting user data');</script>";
+                                                //echo "<script>alert('Error while inserting user data');</script>";
+                                                ?>
+                                                <script>alert("<?php echo $err; ?>");</script>
+                                                <?php
                                             }
                                         }
                                         else{
@@ -192,7 +203,10 @@ include('includes/connection.php');
                                                 echo "<script>alert('Data Inserted');</script>";
                                             }
                                             else{
-                                                echo "<script>alert('Error while inserting laptop data');</script>";
+                                                //echo "<script>alert('Error while inserting user data');</script>";
+                                                ?>
+                                                <script>alert("<?php echo $err; ?>");</script>
+                                                <?php
                                             }
                                         }
                                     }
@@ -212,7 +226,7 @@ include('includes/connection.php');
 
     <!-- Main Footer -->
     <?php include 'includes/footer.php'; ?>
-    
+
 </div>
 <!-- ./wrapper -->
 

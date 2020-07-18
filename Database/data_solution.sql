@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 04, 2020 at 02:43 PM
+-- Generation Time: Jul 18, 2020 at 07:45 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.2.30
 
@@ -62,8 +62,7 @@ CREATE TABLE `customer` (
 
 INSERT INTO `customer` (`id`, `name`, `email`, `phone`) VALUES
 (1, 'Vachhani Umang Dhirajbhai', 'umangvachhani2357@gmail.com', '9978555796'),
-(2, 'Yagnesh Baraiya', 'dryagnesh.baraiya@gmail.com', '9512240122'),
-(3, 'Nimit', 'nirav96016@gmail.com', '9537522691');
+(2, 'Nimit', '', '0953752269');
 
 -- --------------------------------------------------------
 
@@ -80,10 +79,10 @@ CREATE TABLE `dvr` (
   `priority` varchar(64) NOT NULL,
   `problem` text NOT NULL,
   `estimate` int(11) NOT NULL DEFAULT 2000,
-  `status` tinyint(4) NOT NULL,
+  `status` text NOT NULL DEFAULT 'Waiting for action',
   `inward` timestamp NOT NULL DEFAULT current_timestamp(),
   `outward` timestamp NULL DEFAULT NULL,
-  `returned` tinyint(4) NOT NULL
+  `returned` tinyint(4) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -91,7 +90,7 @@ CREATE TABLE `dvr` (
 --
 
 INSERT INTO `dvr` (`id`, `customer_id`, `company`, `storage_capacity`, `storage_unit`, `priority`, `problem`, `estimate`, `status`, `inward`, `outward`, `returned`) VALUES
-(1, 3, 'wd', 200, 'GB', 'asdf', 'fhjkljhk sdfg', 4000, 0, '2020-06-22 15:59:32', NULL, 1);
+(1, 1, 'WD', 128, 'GB', 'NULL', 'Aasdbsbbehw', 2000, '0', '2020-07-18 17:17:18', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -105,14 +104,6 @@ CREATE TABLE `failed_login` (
   `time` timestamp NOT NULL DEFAULT current_timestamp(),
   `ip_address` varchar(64) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `failed_login`
---
-
-INSERT INTO `failed_login` (`id`, `email`, `time`, `ip_address`) VALUES
-(1, 'nimitkansagra@outlook.com', '2020-06-18 05:35:24', '::1'),
-(2, 'nimitkansagra@outlook.com', '2020-06-22 13:39:30', '::1');
 
 -- --------------------------------------------------------
 
@@ -134,18 +125,11 @@ CREATE TABLE `harddisk` (
   `priority` varchar(64) NOT NULL,
   `problem` text NOT NULL,
   `estimate` int(11) NOT NULL DEFAULT 2000,
-  `status` text NOT NULL,
+  `status` text NOT NULL DEFAULT 'Waiting for action',
   `inward` timestamp NOT NULL DEFAULT current_timestamp(),
   `outward` timestamp NULL DEFAULT NULL,
   `returned` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `harddisk`
---
-
-INSERT INTO `harddisk` (`id`, `customer_id`, `serial_no`, `firmware_no`, `wwn_no`, `type`, `ssd_type`, `company`, `storage_capacity`, `storage_unit`, `priority`, `problem`, `estimate`, `status`, `inward`, `outward`, `returned`) VALUES
-(1, 3, 'WDJAOK988655', 'WDJ6688BLKE', '', 'Desktop', '', 'WD', 1, 'TB', '', 'Head not working', 3004, 'Recovery completed', '2020-06-24 05:52:12', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -163,26 +147,11 @@ CREATE TABLE `laptop` (
   `with_harddisk` tinyint(4) NOT NULL,
   `problem` text NOT NULL,
   `estimate` int(11) NOT NULL DEFAULT 1500,
-  `status` text NOT NULL,
+  `status` text NOT NULL DEFAULT 'Waiting for action',
   `inward` timestamp NOT NULL DEFAULT current_timestamp(),
   `outward` timestamp NULL DEFAULT NULL,
   `returned` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `laptop`
---
-
-INSERT INTO `laptop` (`id`, `customer_id`, `company`, `model_no`, `with_adapter`, `with_battery`, `with_harddisk`, `problem`, `estimate`, `status`, `inward`, `outward`, `returned`) VALUES
-(1, 1, 'HP', '1', 1, 0, 1, 'prblem', 5600, 'Waiting for action', '2020-06-19 10:36:28', NULL, 0),
-(2, 1, 'dell', '98', 1, 0, 0, 'Problem2', 2000, 'Rejected', '2020-06-19 10:36:28', NULL, 0),
-(4, 1, 'Asus', 'Rog 3', 0, 0, 0, 'Probmlemo', 0, '0', '2020-06-19 10:36:28', NULL, 0),
-(5, 1, 'Samsung', 'S231', 0, 0, 0, 'Problemo2', 0, '0', '2020-06-19 10:36:28', NULL, 0),
-(6, 1, 'Samsung', 'S231', 0, 0, 0, 'Problemo2', 0, '0', '2020-06-19 10:36:28', NULL, 0),
-(7, 1, 'Samsung', 'S231', 0, 0, 0, 'Problemo2', 0, '0', '2020-06-19 10:36:28', NULL, 0),
-(8, 1, 'Samsung', 'S000', 1, 0, 0, 'Problem', 0, '0', '2020-06-19 10:36:28', NULL, 0),
-(9, 1, 'Samsung', 'S322', 0, 0, 0, 'Problito', 0, '0', '2020-06-19 10:36:28', NULL, 0),
-(10, 2, 'WD', 'WD31234', 1, 0, 0, 'Not working', 0, '0', '2020-06-22 14:18:15', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -199,7 +168,7 @@ CREATE TABLE `memorycard` (
   `priority` varchar(64) NOT NULL,
   `estimate` int(11) NOT NULL DEFAULT 2000,
   `problem` text NOT NULL,
-  `status` tinyint(4) NOT NULL,
+  `status` text NOT NULL DEFAULT 'Waiting for action',
   `inward` timestamp NOT NULL DEFAULT current_timestamp(),
   `outward` timestamp NULL DEFAULT NULL,
   `returned` tinyint(4) NOT NULL
@@ -221,18 +190,11 @@ CREATE TABLE `motherboard` (
   `with_fan` tinyint(4) NOT NULL,
   `problem` text NOT NULL,
   `estimate` int(11) NOT NULL DEFAULT 350,
-  `status` text NOT NULL,
+  `status` text NOT NULL DEFAULT 'Waiting for action',
   `inward` timestamp NOT NULL DEFAULT current_timestamp(),
   `outward` timestamp NULL DEFAULT NULL,
   `returned` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `motherboard`
---
-
-INSERT INTO `motherboard` (`id`, `customer_id`, `company`, `name`, `with_ram`, `with_cpu`, `with_fan`, `problem`, `estimate`, `status`, `inward`, `outward`, `returned`) VALUES
-(1, 2, 'Asus', 'LGA11', 0, 1, 1, 'Problemo', 350, 'Rejected', '2020-06-19 13:37:00', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -249,11 +211,18 @@ CREATE TABLE `pendrive` (
   `priority` varchar(64) NOT NULL,
   `problem` text NOT NULL,
   `estimate` int(11) NOT NULL DEFAULT 2000,
-  `status` tinyint(4) NOT NULL,
+  `status` text NOT NULL DEFAULT 'Waiting for action',
   `inward` timestamp NOT NULL DEFAULT current_timestamp(),
   `outward` timestamp NULL DEFAULT NULL,
   `returned` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `pendrive`
+--
+
+INSERT INTO `pendrive` (`id`, `customer_id`, `company`, `storage_capacity`, `storage_unit`, `priority`, `problem`, `estimate`, `status`, `inward`, `outward`, `returned`) VALUES
+(1, 2, 'HP', 32, 'GB', 'NULL', 'Problem1', 2000, '0', '2020-07-18 17:18:18', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -368,7 +337,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `dvr`
@@ -380,19 +349,19 @@ ALTER TABLE `dvr`
 -- AUTO_INCREMENT for table `failed_login`
 --
 ALTER TABLE `failed_login`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `harddisk`
 --
 ALTER TABLE `harddisk`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `laptop`
 --
 ALTER TABLE `laptop`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `memorycard`
@@ -404,13 +373,13 @@ ALTER TABLE `memorycard`
 -- AUTO_INCREMENT for table `motherboard`
 --
 ALTER TABLE `motherboard`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `pendrive`
 --
 ALTER TABLE `pendrive`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `status`

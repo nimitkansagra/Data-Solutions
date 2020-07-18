@@ -66,7 +66,7 @@ include('includes/connection.php');
                                     <!-- form start -->
                                     <form role="form" action="<?php  echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
                                         <div class="card-body">
-                                        <div class="row">
+                                            <div class="row">
                                                 <div class="form-group col-12 col-sm-12 col-md-4">
                                                     <label for="mobileNo">Mobile No *</label>
                                                     <input type="text" class="form-control" name="mobileNo" id="mobileNo" placeholder="Mobile No" required>
@@ -200,74 +200,140 @@ include('includes/connection.php');
                                         $email = $_POST['email'];
                                         $phone = $_POST['mobileNo'];
 
-                                        $sql = "";
-                                        $storageDevice = $_POST['storageDevice'];  // type of device
+                                        $storageDevice = $_POST['storageDevice']; // type of device
+                                        if(empty($storageDevice)){
+                                            $storageDevice = "NULL";
+                                        }
                                         $company = $_POST['company'];
+                                        if(empty($company)){
+                                            $company = "NULL";
+                                        }
                                         $storageCapacity = $_POST['storageCapacity'];
+                                        if(empty($storageCapacity)){
+                                            $storageCapacity = "NULL";
+                                        }
                                         $storageUnit = $_POST['storageUnit'];
+                                        if(empty($storageUnit)){
+                                            $storageUnit = "NULL";
+                                        }
                                         $priority = $_POST['priority'];
+                                        if(empty($priority)){
+                                            $priority = "NULL";
+                                        }
                                         $problem = $_POST['problem'];
+                                        if(empty($problem)){
+                                            $problem = "NULL";
+                                        }
 
                                         // hard disk parameters
                                         $serialNo = $_POST['serialNo'];
+                                        if(empty($serialNo)){
+                                            $serialNo = "NULL";
+                                        }
                                         $firmwareNo = $_POST['firmwareNo'];
+                                        if(empty($firmwareNo)){
+                                            $firmwareNo = "NULL";
+                                        }
                                         $wwnNo = $_POST['wwnNo'];
+                                        if(empty($wwnNo)){
+                                            $wwnNo = "NULL";
+                                        }
                                         $hardDiskType = $_POST['hardDiskType'];
-                                        $ssdType = "";
+                                        if(empty($hardDiskType)){
+                                            $hardDiskType = "NULL";
+                                        }
+                                        $ssdType = "NULL";
                                         if ($_POST['ssdType']) {
                                             $ssdType = $_POST['ssdType'];
                                         }
 
-                                        if($storageDevice == "Hard Disk"){
-                                            $sql = "INSERT INTO harddisk (customer_id,serial_no,firmware_no,wwn_no,type,ssd_type,company,storage_capacity,storage_unit,priority,problem)
-                                            VALUES ('$customerId','$serialNo','$firmwareNo','$wwnNo','$hardDiskType','$ssdType','$company','$storageCapacity','$storageUnit','$priority','$problem')";
-                                        }
-                                        elseif ($storageDevice == "DVR") {
-                                            $sql = "INSERT INTO dvr (customer_id,company,storage_capacity,storage_unit,priority,problem)
-                                            VALUES ('$customerId','$company','$storageCapacity','$storageUnit','$priority','$problem')";
-                                        }
-                                        elseif ($storageDevice == "Pen Drive") {
-                                            $sql = "INSERT INTO pendrive (customer_id,company,storage_capacity,storage_unit,priority,problem)
-                                            VALUES ('$customerId','$company','$storageCapacity','$storageUnit','$priority','$problem')";
-                                        }
-                                        elseif ($storageDevice == "Memory Card") {
-                                            $sql = "INSERT INTO memorycard (customer_id,company,storage_capacity,storage_unit,priority,problem)
-                                            VALUES ('$customerId','$company','$storageCapacity','$storageUnit','$priority','$problem')";
-                                        }
-
                                         //$newId = 0;
-
+                                        //echo $sql;
                                         // New customer entery and fetch Id
                                         if($customerId=="0"){
-                                            $sql1 = "INSERT INTO customer (name,email,phone) VALUES ('$name','$email','$phone')";
+                                            $sql1 = "";
+                                            if(empty($email)){
+                                                $sql1 = "INSERT INTO customer (name,phone) VALUES ('$name','$phone')";
+                                            }else{
+                                                $sql1 = "INSERT INTO customer (name,email,phone) VALUES ('$name','$email','$phone')";
+                                            }
+
+                                            //echo $sql1;
+                                            //echo $sql;
                                             if(mysqli_query($con, $sql1)){
                                                 $sql2 = "SELECT id FROM customer WHERE phone = '$phone'";
                                                 $result = mysqli_query($con, $sql2);
                                                 if(mysqli_num_rows($result) > 0) {
+                                                    echo "<script>alert('new customer')</script>";
                                                     $row = mysqli_fetch_assoc($result);
                                                     $customerId = $row['id'];
-                                                    //new customer laptop insert
+                                                    //echo $customerId."<br>";
+                                                    $sql = "";
+                                                    if($storageDevice == "Hard Disk"){
+                                                        $sql = "INSERT INTO harddisk (customer_id,serial_no,firmware_no,wwn_no,type,ssd_type,company,storage_capacity,storage_unit,priority,problem)
+                                                        VALUES ('$customerId','$serialNo','$firmwareNo','$wwnNo','$hardDiskType','$ssdType','$company','$storageCapacity','$storageUnit','$priority','$problem')";
+                                                    }
+                                                    elseif ($storageDevice == "DVR") {
+                                                        $sql = "INSERT INTO dvr (customer_id,company,storage_capacity,storage_unit,priority,problem)
+                                                        VALUES ('$customerId','$company','$storageCapacity','$storageUnit','$priority','$problem')";
+                                                    }
+                                                    elseif ($storageDevice == "Pen Drive") {
+                                                        $sql = "INSERT INTO pendrive (customer_id,company,storage_capacity,storage_unit,priority,problem)
+                                                        VALUES ('$customerId','$company','$storageCapacity','$storageUnit','$priority','$problem')";
+                                                    }
+                                                    elseif ($storageDevice == "Memory Card") {
+                                                        $sql = "INSERT INTO memorycard (customer_id,company,storage_capacity,storage_unit,priority,problem)
+                                                        VALUES ('$customerId','$company','$storageCapacity','$storageUnit','$priority','$problem')";
+                                                    }
                                                     echo $sql;
+                                                    //new customer laptop insert
                                                     if(mysqli_query($con, $sql)) {
                                                         echo "<script>alert('Data Inserted');</script>";
                                                     }
                                                     else{
-                                                        echo "<script>alert('Error while inserting storage device data');</script>";
+                                                        $err = "Error: ". mysqli_error($con);
+                                                        ?>
+                                                        <script>alert("<?php echo $err; ?>");</script>
+                                                        <?php
                                                     }
                                                 }
                                             }
                                             else{
-                                                echo "<script>alert('Error while inserting user data');</script>";
+                                                $err = "Error: ". mysqli_error($con);
+                                                ?>
+                                                <script>alert("<?php echo $err; ?>");</script>
+                                                <?php
                                             }
                                         }
                                         else{
                                             // existing customer laptop insert
+                                            $sql = "";
+                                            if($storageDevice == "Hard Disk"){
+                                                $sql = "INSERT INTO harddisk (customer_id,serial_no,firmware_no,wwn_no,type,ssd_type,company,storage_capacity,storage_unit,priority,problem)
+                                                VALUES ('$customerId','$serialNo','$firmwareNo','$wwnNo','$hardDiskType','$ssdType','$company','$storageCapacity','$storageUnit','$priority','$problem')";
+                                            }
+                                            elseif ($storageDevice == "DVR") {
+                                                $sql = "INSERT INTO dvr (customer_id,company,storage_capacity,storage_unit,priority,problem)
+                                                VALUES ('$customerId','$company','$storageCapacity','$storageUnit','$priority','$problem')";
+                                            }
+                                            elseif ($storageDevice == "Pen Drive") {
+                                                $sql = "INSERT INTO pendrive (customer_id,company,storage_capacity,storage_unit,priority,problem)
+                                                VALUES ('$customerId','$company','$storageCapacity','$storageUnit','$priority','$problem')";
+                                            }
+                                            elseif ($storageDevice == "Memory Card") {
+                                                $sql = "INSERT INTO memorycard (customer_id,company,storage_capacity,storage_unit,priority,problem)
+                                                VALUES ('$customerId','$company','$storageCapacity','$storageUnit','$priority','$problem')";
+                                            }
                                             echo $sql;
                                             if(mysqli_query($con, $sql)) {
                                                 echo "<script>alert('Data Inserted');</script>";
                                             }
                                             else{
-                                                echo "<script>alert('Error while inserting storage device data');</script>";
+                                                $err = "Error: ". mysqli_error($con);
+                                                ?>
+                                                <script>alert("<?php echo $err; ?>");</script>
+                                                <?php
+                                                //echo "<script>alert('Error while inserting storage device data');</script>";
                                             }
                                         }
                                     }
@@ -288,7 +354,7 @@ include('includes/connection.php');
 
     <!-- Main Footer -->
     <?php include 'includes/footer.php'; ?>
-    
+
 </div>
 <!-- ./wrapper -->
 
