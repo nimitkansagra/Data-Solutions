@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 18, 2020 at 07:45 PM
+-- Generation Time: Jul 22, 2020 at 06:49 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.2.30
 
@@ -52,17 +52,9 @@ INSERT INTO `admin` (`id`, `name`, `email`, `password`, `last_login_time`, `last
 CREATE TABLE `customer` (
   `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(64) NOT NULL,
-  `email` varchar(64) NOT NULL,
+  `email` varchar(64) DEFAULT NULL,
   `phone` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `customer`
---
-
-INSERT INTO `customer` (`id`, `name`, `email`, `phone`) VALUES
-(1, 'Vachhani Umang Dhirajbhai', 'umangvachhani2357@gmail.com', '9978555796'),
-(2, 'Nimit', '', '0953752269');
 
 -- --------------------------------------------------------
 
@@ -84,13 +76,6 @@ CREATE TABLE `dvr` (
   `outward` timestamp NULL DEFAULT NULL,
   `returned` tinyint(4) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `dvr`
---
-
-INSERT INTO `dvr` (`id`, `customer_id`, `company`, `storage_capacity`, `storage_unit`, `priority`, `problem`, `estimate`, `status`, `inward`, `outward`, `returned`) VALUES
-(1, 1, 'WD', 128, 'GB', 'NULL', 'Aasdbsbbehw', 2000, '0', '2020-07-18 17:17:18', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -217,13 +202,6 @@ CREATE TABLE `pendrive` (
   `returned` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `pendrive`
---
-
-INSERT INTO `pendrive` (`id`, `customer_id`, `company`, `storage_capacity`, `storage_unit`, `priority`, `problem`, `estimate`, `status`, `inward`, `outward`, `returned`) VALUES
-(1, 2, 'HP', 32, 'GB', 'NULL', 'Problem1', 2000, '0', '2020-07-18 17:18:18', NULL, 0);
-
 -- --------------------------------------------------------
 
 --
@@ -265,8 +243,8 @@ ALTER TABLE `admin`
 --
 ALTER TABLE `customer`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `email` (`email`),
-  ADD UNIQUE KEY `phone` (`phone`);
+  ADD UNIQUE KEY `phone` (`phone`),
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- Indexes for table `dvr`
@@ -337,13 +315,13 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `dvr`
 --
 ALTER TABLE `dvr`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `failed_login`
@@ -379,7 +357,7 @@ ALTER TABLE `motherboard`
 -- AUTO_INCREMENT for table `pendrive`
 --
 ALTER TABLE `pendrive`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `status`
