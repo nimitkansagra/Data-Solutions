@@ -201,35 +201,37 @@ include('includes/connection.php');
                                         $phone = $_POST['mobileNo'];
 
                                         $storageDevice = $_POST['storageDevice']; // type of device
-                                        if(empty($storageDevice)){
+                                        /*if(empty($storageDevice)){
                                             $storageDevice = "NULL";
-                                        }
+                                        }*/
                                         $company = $_POST['company'];
-                                        if(empty($company)){
+                                        /*if(empty($company)){
                                             $company = "NULL";
-                                        }
+                                        }*/
                                         $storageCapacity = $_POST['storageCapacity'];
-                                        if(empty($storageCapacity)){
+                                        /*if(empty($storageCapacity)){
                                             $storageCapacity = "NULL";
-                                        }
+                                        }*/
                                         $storageUnit = $_POST['storageUnit'];
-                                        if(empty($storageUnit)){
+                                        /*if(empty($storageUnit)){
                                             $storageUnit = "NULL";
-                                        }
+                                        }*/
+
+                                       
                                         $priority = $_POST['priority'];
                                         if(empty($priority)){
-                                            $priority = "NULL";
+                                            $priority = 'NULL';
                                         }
                                         $problem = $_POST['problem'];
-                                        if(empty($problem)){
-                                            $problem = "NULL";
-                                        }
+                                        /*if(empty($problem)){
+                                            $problem = NULL;
+                                        }*/
 
                                         // hard disk parameters
-                                        $serialNo = $_POST['serialNo'];
+                                        /*$serialNo = $_POST['serialNo'];
                                         if(empty($serialNo)){
                                             $serialNo = "NULL";
-                                        }
+                                        }*/
                                         $firmwareNo = $_POST['firmwareNo'];
                                         if(empty($firmwareNo)){
                                             $firmwareNo = "NULL";
@@ -248,7 +250,6 @@ include('includes/connection.php');
                                         }
 
                                         //$newId = 0;
-                                        //echo $sql;
                                         // New customer entery and fetch Id
                                         if($customerId=="0"){
                                             $sql1 = "";
@@ -259,12 +260,11 @@ include('includes/connection.php');
                                             }
 
                                             //echo $sql1;
-                                            //echo $sql;
                                             if(mysqli_query($con, $sql1)){
                                                 $sql2 = "SELECT id FROM customer WHERE phone = '$phone'";
                                                 $result = mysqli_query($con, $sql2);
                                                 if(mysqli_num_rows($result) > 0) {
-                                                    echo "<script>alert('new customer')</script>";
+                                                    //echo "<script>alert('new customer')</script>";
                                                     $row = mysqli_fetch_assoc($result);
                                                     $customerId = $row['id'];
                                                     //echo $customerId."<br>";

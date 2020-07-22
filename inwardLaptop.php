@@ -100,11 +100,11 @@ include('includes/connection.php');
                                             <div class="row">
                                                 <div class="form-group col-12 col-sm-12 col-md-6">
                                                     <label for="company">Company</label>
-                                                    <input type="text" class="form-control" name="company" placeholder="Enter Full Name" required>
+                                                    <input type="text" class="form-control" name="company" placeholder="Enter Company" required>
                                                 </div>
                                                 <div class="form-group col-12 col-sm-12 col-md-6">
-                                                    <label for="motherboardName">Model No</label>
-                                                    <input type="text" class="form-control" name="modelNo" placeholder="Enter Email" required>
+                                                    <label for="modelNo">Model No</label>
+                                                    <input type="text" class="form-control" name="modelNo" placeholder="Enter Model No" required>
                                                 </div>
                                             </div>
                                             <div class="form-check">
