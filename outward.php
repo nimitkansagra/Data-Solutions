@@ -5,6 +5,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     $id = $_GET['id'];
     $customerId = $_GET['customerId'];
     $type = $_GET['type'];
+    $deatils_row = array();
 }
 ?>
 <!DOCTYPE html>
@@ -61,48 +62,49 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                        <?php
-                            $sql = "SELECT * FROM laptop WHERE id='$id'";
+                            <?php
+                            $sql = "SELECT * FROM ".$type." WHERE id='$id'";
                             $result = mysqli_query($con, $sql);
                             if (mysqli_num_rows($result) > 0) {
                                 $row = mysqli_fetch_assoc($result);
-                         ?>
-                            <form role="form" action="outwardAction.php" method="POST">
-                                <div class="row">
-                                    <div class="form-group col-12 col-sm-12 col-md-2">
-                                        <label for="returned">Returned</label>
-                                        <div class="form-check">
-                                          <input type="checkbox" class="form-check-input" name="returned" value="1">
-                                          <label class="form-check-label" for="returned">Yes</label>
+                                $deatils_row = $row;
+                                ?>
+                                <form role="form" action="outwardAction.php" method="POST">
+                                    <div class="row">
+                                        <div class="form-group col-12 col-sm-12 col-md-2">
+                                            <label for="returned">Returned</label>
+                                            <div class="form-check">
+                                                <input type="checkbox" class="form-check-input" name="returned" value="1">
+                                                <label class="form-check-label" for="returned">Yes</label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-12 col-sm-12 col-md-10">
+                                            <label>Status</label>
+                                            <select class="form-control" name="status" value="<?php echo $row['status']?>" required>
+                                                <?php
+                                                $sqlStatus = "SELECT title FROM status";
+                                                $result = mysqli_query($con,$sqlStatus);
+                                                if(mysqli_num_rows($result)>0){
+                                                    while ($row2 = mysqli_fetch_assoc($result)) {
+                                                        ?>
+                                                        <option value="<?php echo $row2['title']; ?>" <?php if ($row2['title']==$row['status']) echo "selected"; else echo ""; ?> ><?php echo $row2['title']; ?></option>
+                                                        <?php
+                                                    }
+                                                }
+                                                ?>
+                                            </select>
                                         </div>
                                     </div>
-                                    <div class="form-group col-12 col-sm-12 col-md-10">
-                                        <label>Status</label>
-                                        <select class="form-control" name="status" value="<?php echo $row['status']?>" required>
-                                            <?php
-                                            $sqlStatus = "SELECT title FROM status";
-                                            $result = mysqli_query($con,$sqlStatus);
-                                            if(mysqli_num_rows($result)>0){
-                                                while ($row2 = mysqli_fetch_assoc($result)) {
-                                                    ?>
-                                                    <option value="<?php echo $row2['title']; ?>" <?php if ($row2['title']==$row['status']) echo "selected"; else echo ""; ?> ><?php echo $row2['title']; ?></option>
-                                                    <?php
-                                                }
-                                            }
-                                            ?>
-                                        </select>
-                                    </div>
-                                </div>
-                                <input type="hidden" name="id" value="<?php echo $id; ?>">
-                                <input type="hidden" name="type" value="<?php echo $type; ?>">
-                                <button type="submit" class="btn btn-primary btn-block" name="submit">Update</button>
-                            </form>
-                        <?php
+                                    <input type="hidden" name="id" value="<?php echo $id; ?>">
+                                    <input type="hidden" name="type" value="<?php echo $type; ?>">
+                                    <button type="submit" class="btn btn-primary btn-block" name="submit">Update</button>
+                                </form>
+                                <?php
                             }
                             else {
                                 echo "No data found !";
                             }
-                         ?>
+                            ?>
                         </div>
                         <!-- /.card-body -->
                     </div>
@@ -120,24 +122,24 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                         <!-- /.card-header -->
                         <div class="card-body">
                             <dl>
-                            <?php
+                                <?php
                                 $sql1 = "SELECT * FROM customer WHERE id='$customerId'";
                                 $result1 = mysqli_query($con, $sql1);
                                 if (mysqli_num_rows($result1) > 0) {
                                     $row1 = mysqli_fetch_assoc($result1);
-                             ?>
-                                <dt>Name</dt>
-                                <dd><?php echo $row1['name']; ?></dd>
-                                <dt>Email</dt>
-                                <dd><?php echo $row1['email']; ?></dd>
-                                <dt>Phone no</dt>
-                                <dd><?php echo $row1['phone']; ?></dd>
-                            <?php
+                                    ?>
+                                    <dt>Name</dt>
+                                    <dd><?php echo $row1['name']; ?></dd>
+                                    <dt>Email</dt>
+                                    <dd><?php echo $row1['email']; ?></dd>
+                                    <dt>Phone no</dt>
+                                    <dd><?php echo $row1['phone']; ?></dd>
+                                    <?php
                                 }
                                 else {
                                     echo "No data found !";
                                 }
-                             ?>
+                                ?>
                             </dl>
                         </div>
                         <!-- /.card-body -->
@@ -152,14 +154,42 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <dl>
-                                <dt>Title</dt>
-                                <dd>Description</dd>
-                                <dt>Title</dt>
-                                <dd>Description</dd>
-                                <dt>Title</dt>
-                                <dd>Description</dd>
-                            </dl>
+                            <?php
+                            if($type=="harddisk"){
+                                echo "<dl>
+                                <dt>Serial No.</dt>
+                                <dd>{$deatils_row['serial_no']}</dd>
+                                <dt>Company</dt>
+                                <dd>{$deatils_row['company']}</dd>
+                                <dt>Storage</dt>
+                                <dd>{$deatils_row['storage_capacity']} {$deatils_row['storage_unit']}</dd>
+                                </dl>";
+                            }
+                            elseif ($type=="dvr"||$type=="pendrive"||$type=="memorycard") {
+                                echo "<dl>
+                                <dt>Company</dt>
+                                <dd>{$deatils_row['company']}</dd>
+                                <dt>Storage</dt>
+                                <dd>{$deatils_row['storage_capacity']} {$deatils_row['storage_unit']}</dd>
+                                </dl>";
+                            }
+                            elseif ($type=="laptop") {
+                                echo "<dl>
+                                <dt>Company</dt>
+                                <dd>{$deatils_row['company']}</dd>
+                                <dt>Model No.</dt>
+                                <dd>{$deatils_row['serial_no']}</dd>
+                                </dl>";
+                            }
+                            elseif ($type=="motherboard") {
+                                echo "<dl>
+                                <dt>Company</dt>
+                                <dd>{$deatils_row['company']}</dd>
+                                <dt>Model No.</dt>
+                                <dd>{$deatils_row['name']}</dd>
+                                </dl>";
+                            }
+                            ?>
                         </div>
                         <!-- /.card-body -->
                     </div>

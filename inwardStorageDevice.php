@@ -228,10 +228,10 @@ include('includes/connection.php');
                                         }*/
 
                                         // hard disk parameters
-                                        /*$serialNo = $_POST['serialNo'];
+                                        $serialNo = $_POST['serialNo'];
                                         if(empty($serialNo)){
                                             $serialNo = "NULL";
-                                        }*/
+                                        }
                                         $firmwareNo = $_POST['firmwareNo'];
                                         if(empty($firmwareNo)){
                                             $firmwareNo = "NULL";
