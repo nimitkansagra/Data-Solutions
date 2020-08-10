@@ -52,7 +52,7 @@
             <div class="info-box">
               <span class="info-box-icon bg-info elevation-1"><i class="fas fa-users"></i></span>
               <div class="info-box-content">
-                <span class="info-box-text">Users</span>
+                <span class="info-box-text">Customers</span>
                 <span class="info-box-number">
                   <?php
                       $sql = "select count(id)'customers' from customer";
